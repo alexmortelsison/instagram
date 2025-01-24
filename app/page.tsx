@@ -2,6 +2,9 @@ import Feed from "@/components/Feed";
 import LeftSidebar from "@/components/LeftSidebar";
 import Navbar from "@/components/Navbar";
 import RightSidebar from "@/components/RightSidebar";
+import connectToDatabase from "@/db";
+
+connectToDatabase();
 
 export default function Home() {
   return (
