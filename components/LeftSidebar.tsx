@@ -16,6 +16,7 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import Modal from "./Modal";
+import { UploadButton } from "@/lib/uploadthing";
 
 export default function LeftSidebar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,15 +62,19 @@ export default function LeftSidebar() {
           <div className="flex items-center justify-center w-32 h-32 border-2 border-dashed border-gray-400 rounded-full mb-6">
             <CirclePlus size={100} className="text-gray-400" />
           </div>
-
           <p className="text-gray-600 mb-4">Drag photos and videos here</p>
-
-          <button
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
-            onClick={() => alert("File selection dialog would go here")}
-          >
-            Select from computer
-          </button>
+          <UploadButton
+            endpoint="imageUploader"
+            onClientUploadComplete={(res) => {
+              // Do something with the response
+              console.log("Files: ", res);
+              alert("Upload Completed");
+            }}
+            onUploadError={(error: Error) => {
+              // Do something with the error.
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
         </div>
       </Modal>
     </div>
